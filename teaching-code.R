@@ -204,12 +204,12 @@ explainer <- lime(iris_train, model,
 explanation <- explain(iris_explain,
                        explainer,
                        n_labels = 1,
-                       n_features = 4,
+                       n_features = 2,
                        n_permutations = 5000,
                        feature_select = "auto")
 # explore explanations
 explanation
-head(eexplanation)
+head(explanation)
 View(explanation)
 
 # plot explanations

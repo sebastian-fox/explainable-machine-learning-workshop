@@ -5,6 +5,9 @@ AdultUCI$income <- factor(AdultUCI$income,
 AdultUCI$education <- factor(AdultUCI$education,
                              ordered = FALSE)
 
+set.seed(42)
+AdultUCI <- AdultUCI[sample(1:nrow(AdultUCI), 1000),]
+
 ind <- sample(1:nrow(AdultUCI), 5)
 AdultUCI_explain <- AdultUCI[ind, -ncol(AdultUCI)]
 AdultUCI_train <- AdultUCI[-ind, -ncol(AdultUCI)]
