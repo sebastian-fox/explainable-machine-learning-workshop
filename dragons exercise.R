@@ -40,17 +40,6 @@ mp_rf <- model_performance(explainer_rf)
 
 plot(mp_lm, mp_rf, geom = "boxplot")
 
-vi_rf <- ingredients::feature_importance(
-  explainer_rf,
-  loss_function = loss_root_mean_square)
-
-vi_lm <- ingredients::feature_importance(
-  explainer_lm,
-  loss_function = loss_root_mean_square)
-
-vi_rf
-
-plot(vi_rf, vi_lm)
 
 
 
@@ -69,3 +58,25 @@ ggplot(mp_lm,
   ylab("Predicted - Observed") + 
   ggtitle("Diagnostic plot") + 
   theme_mi2()
+
+vi_rf <- ingredients::feature_importance(
+  explainer_rf,
+  loss_function = loss_root_mean_square)
+
+vi_lm <- ingredients::feature_importance(
+  explainer_lm,
+  loss_function = loss_root_mean_square)
+
+vi_rf
+
+plot(vi_rf, vi_lm)
+
+
+sv_rf  <- single_variable(explainer_rf, 
+                          variable = "height", 
+                          type = "pdp")
+sv_lm  <- single_variable(explainer_lm, 
+                          variable = "height", 
+                          type = "pdp")
+plot(sv_rf, sv_lm) +
+  ggtitle("Partial dependency plots for height feature")

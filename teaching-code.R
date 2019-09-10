@@ -10,7 +10,7 @@ data("apartments_test")
 
 # train random forest and linear model
 head(apartments)
-set.seed(519)
+set.seed(123)
 
 ## train RF model
 apartments_rf_model <- 
@@ -137,6 +137,13 @@ sv_lm  <- single_variable(explainer_lm,
 plot(sv_rf, sv_lm)
 
 # effect of number of rooms ("no.rooms") is also more sigmoid than linear
+sv_rf  <- single_variable(explainer_rf, 
+                          variable = "no.rooms", 
+                          type = "pdp")
+sv_lm  <- single_variable(explainer_lm, 
+                          variable = "no.rooms", 
+                          type = "pdp")
+plot(sv_rf, sv_lm)
 
 
 # dalex: How does the model work? > Categorical variable ------------------
@@ -153,14 +160,16 @@ plot(sv_rf, sv_lm)
 # - Stars present how significant are differences between the two clusters. 
 # - The numbers present the value of prediction: Intercept + factor_level
 
+
 svd_rf  <- single_variable(explainer_rf, 
                            variable = "district", 
                            type = "factor")
 svd_lm  <- single_variable(explainer_lm, 
                            variable = "district", 
                            type = "factor")
-plot(svd_rf, svd_lm)
 
+## This is called a merging paths plot
+plot(svd_rf, svd_lm)
 
 
 # ~~~~~~~~ exercise ~~~~~~~~
